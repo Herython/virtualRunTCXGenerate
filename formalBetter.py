@@ -116,7 +116,7 @@ def create_tcx(date, start_time, total_distance, total_time):
         distance.text = str(total_distance_calculated)
     
     xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
-    directory = "/Users/Herython/Desktop/Test/running/te"
+    directory = "/Users/Herython/Desktop/Test/running/te1"
     if not os.path.exists(directory):
         os.makedirs(directory)
     filename = f"{directory}/{date.month}_{date.day}.tcx"
