@@ -93,6 +93,7 @@ def create_tcx():
     num_points_per_circle = int((1579 / 7.55) / 2.056)
     trackpoints = generate_trackpoints(num_points_per_circle)
     
+    total_distance = 0.0
     for i, (lat, lon, alt) in enumerate(trackpoints[:int(1579 / 2.056)]):
         trackpoint = ET.SubElement(track, "Trackpoint")
         
@@ -111,7 +112,8 @@ def create_tcx():
         altitude.text = str(alt)
         
         distance = ET.SubElement(trackpoint, "DistanceMeters")
-        distance.text = str(i * 3.02 / len(trackpoints) * 400)  # 简单线性插值距离
+        total_distance += 3.02 / len(trackpoints) * 400
+        distance.text = str(total_distance)  # 简单线性插值距离
     
     # Pretty print
     xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
