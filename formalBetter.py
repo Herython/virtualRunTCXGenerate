@@ -129,7 +129,8 @@ for i in range(30):
     start_hour = random.randint(17, 20)
     start_minute = random.randint(0, 59) if start_hour != 20 else random.randint(0, 12)
     start_second = random.randint(0, 59)
-    start_time = datetime(date.year, date.month, date.day, start_hour, start_minute, start_second)
+    beijing_time = datetime(date.year, date.month, date.day, start_hour, start_minute, start_second)
+    start_time = beijing_time - timedelta(hours=8)  # 转换为UTC时间
 
     total_distance = random.uniform(3020, 3230)
     total_time = random.uniform(25*60, 30*60)
