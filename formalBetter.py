@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from datetime import datetime, timedelta
 import random
+import os
 
 def interpolate_points(points, num_intervals):
     latitudes = [point[0] for point in points]
@@ -115,7 +116,10 @@ def create_tcx(date, start_time, total_distance, total_time):
         distance.text = str(total_distance_calculated)
     
     xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
-    filename = f"/Users/Herython/Desktop/Test/running/te/{date.month}_{date.day}.tcx"
+    directory = "/Users/Herython/Desktop/Test/running/te"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    filename = f"{directory}/{date.month}_{date.day}.tcx"
     with open(filename, "w") as f:
         f.write(xmlstr)
 
